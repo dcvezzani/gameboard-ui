@@ -1,11 +1,12 @@
 <template>
-  <div class="game-board">
-		<div id="board-canvas"></div>
-		<GamePiece v-for="gamePiece in gamePieces" :key="gamePiece.uuid" :uuid="gamePiece.uuid" :type="gamePiece.type" :left="gamePiece.left" :top="gamePiece.top"></GamePiece>
+	<div id="board-canvas">
+		<div id="game-board">
+			<GamePiece v-for="gamePiece in gamePieces" :key="gamePiece.uuid" :uuid="gamePiece.uuid" :type="gamePiece.type" :left="gamePiece.left" :top="gamePiece.top"></GamePiece>
 
-		<Hand type="peers"></Hand>
-		<Hand type="owner"></Hand>
-  </div>
+			<Hand type="peers"></Hand>
+			<Hand type="owner"></Hand>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -22,12 +23,16 @@ export default {
 				{uuid: 'asdf', type: 'house', top: 100, left: 100}, 
 				{uuid: 'qwer', type: 'house', top: 200, left: 200}, 
 				{uuid: 'zxcv', type: 'house', top: 300, left: 300}, 
+				{uuid: 'zxc1', type: 'house', top: 300, left: 300}, 
+				{uuid: 'zxc2', type: 'house', top: 300, left: 300}, 
+				{uuid: 'zxc3', type: 'house', top: 300, left: 300}, 
+				{uuid: 'zxc4', type: 'house', top: 300, left: 300}, 
 			]
     }
   }, 
 	mounted () {
-		Event.$on('game-piece-dropped', ({uuid, classList, top, left}) => {
-			console.log(['on:game-piece-dropped', {uuid, classList, top, left}])
+		Event.$on('game-piece-dropped', ({on, uuid, classList, top, left}) => {
+			console.log(['on:game-piece-dropped', {on, uuid, classList, top, left}])
 		});
 	},
 }
@@ -50,12 +55,12 @@ a {
   color: #42b983;
 }
 
-.game-board {
+#board-canvas {
 	position: relative;
 	width: 100%;
 	padding: 30px;
 }
-#board-canvas {
+#game-board {
 	position: relative;
 	margin: 0 auto; 
   background-image: url("../assets/monopoly-board-72.jpg");

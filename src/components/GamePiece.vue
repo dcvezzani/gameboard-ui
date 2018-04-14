@@ -18,7 +18,7 @@ export default {
 	},
 	mounted () {
 		$( `#${this.uuid}` ).css({left: this.leftPx, top: this.topPx, position: 'absolute'});
-		$( `#${this.uuid}` ).draggable({ containment: "#app" });
+		$( `#${this.uuid}` ).draggable({ containment: "#app", zIndex: 100 });
 	},
 }
 </script>

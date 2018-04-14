@@ -40,12 +40,25 @@ export default {
 				this.hide();
 			}
 		})
+
+		$( ".hand" ).droppable({
+			drop: function( event, ui ) {
+				// console.log(['droppable', 'something was dropped on hand', ui.draggable[0].id, ui.draggable[0].classList, ui.draggable[0].innerText, ui.offset ]);
+				let classList = _.filter(ui.draggable[0].classList, entry => (typeof entry === 'string'));
+				let positions = ui.offset;
+				let uuid = ui.draggable[0].id;
+				Event.$emit('game-piece-dropped', {on: 'hand', uuid, classList, ...positions});
+
+			}
+		});
+
+		this.$nextTick(()=>{ Event.$emit('hide-hands'); })
 	},
   data () {
     return {
       msg: 'Welcome to Your Vue.js App', 
       transitioning: false,
-      active: true,
+      active: false,
     }
   }
 }
